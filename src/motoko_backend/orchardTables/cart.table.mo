@@ -1,9 +1,10 @@
+import Text "mo:base/Text";
 module {
     public type Cart = {
         cartId : Text;
-        quantity : Nat;
-        unitprice : Float;
-        total : Float;
+        quantity : Text;
+        unitprice : Text;
+        total : Text;
         status : Text;
         product_id : Text;
         user_id : Text;
@@ -11,9 +12,9 @@ module {
 
 
   public type CartPayload = {
-        quantity : Nat;
-        unitprice : Float;
-        total : Float;
+        quantity : Text;
+        unitprice : Text;
+        total : Text;
         status : Text;
         product_id : Text;
         user_id : Text;

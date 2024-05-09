@@ -27,13 +27,14 @@ const Products = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    // Convert quantity to a number if it's not empty
-    const newValue = name === 'quantity' ? parseInt(value, 10) : value;
+    // Convert quantity to a string
+    const newValue = name === 'quantity' ? value.toString() : value;
     setNewCropData({
       ...newCropData,
       [name]: newValue
     });
   };
+  
   
 
   const addCrop = async () => {
@@ -65,6 +66,8 @@ const Products = () => {
             <tr>
               <th>Product ID</th>
               <th>Product Name</th>
+              <th>Product Price</th>
+              <th>Product Quantity</th>
               {/* Add other table headers as needed */}
             </tr>
           </thead>
@@ -73,6 +76,8 @@ const Products = () => {
               <tr key={product[0]}>
                 <td>{product[0]}</td>
                 <td>{product[1].pName}</td>
+                <td>{product[1].price}</td>
+                <td>{product[1].quantity}</td>
                 {/* Add other table data as needed */}
               </tr>
             ))}

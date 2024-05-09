@@ -85,6 +85,7 @@ const handleInputChange = (event) => {
             <tr>
               <th>Crop ID</th>
               <th>Crop Name</th>
+              <th>Crop Age</th>
               {/* Add other table headers as needed */}
             </tr>
           </thead>
@@ -93,6 +94,7 @@ const handleInputChange = (event) => {
               <tr key={crop[0]}>
                 <td>{crop[0]}</td>
                 <td>{crop[1].crop_name}</td>
+                <td>{crop[1].acreage}</td>
                 {/* Add other table data as needed */}
               </tr>
             ))}

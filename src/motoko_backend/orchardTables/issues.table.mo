@@ -4,7 +4,7 @@ module {
         description : Text;
         issue_type : Text;
         status : Text;
-        crop_id : Nat;
+        crop_id : Text;
         user_id : Text;
         farm_specialist_id : Text;
     };
@@ -14,7 +14,7 @@ module {
        description : Text;
         issue_type : Text;
         status : Text;
-        crop_id : Nat;
+        crop_id : Text;
         user_id : Text;
         farm_specialist_id : Text;
     };
