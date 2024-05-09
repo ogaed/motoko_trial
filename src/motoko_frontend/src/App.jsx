@@ -7,7 +7,8 @@ import Login from './routes/Login';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './routes/Home';
 import Navbar from './components/Navbar';
-
+import Dashboard from './Dashboard';
+import FarmerDashboard from './FarmerDashboard'; 
 
 const App = () => {
   return (

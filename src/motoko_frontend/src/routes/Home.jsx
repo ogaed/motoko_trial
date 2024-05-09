@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import addUser from './../../../motoko_backend';
+import { motoko_backend } from '../../../declarations/motoko_backend';
 
 const Home = () => {
   const [userData, setUserData] = useState({
@@ -22,7 +22,7 @@ const Home = () => {
 
   const AddUser = () => {
     const { email, firstName, lastName, role, location, phoneNumber, nationalId } = userData;
-    addUser.addUser({
+    motoko_backend.addUser({
       email,
       first_name: firstName,
       last_name: lastName,

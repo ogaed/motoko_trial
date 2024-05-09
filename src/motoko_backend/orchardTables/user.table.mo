@@ -1,6 +1,6 @@
 module {
     public type User = {
-        userId : Principal;
+        userId : Text;
         email : Text;
         first_name : Text;
         last_name : Text;
