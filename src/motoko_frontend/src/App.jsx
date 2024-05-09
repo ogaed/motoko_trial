@@ -1,6 +1,7 @@
 import { useState } from 'react';
 // import { motoko_backend } from 'declarations/motoko_backend';
 import { motoko_backend } from "../../declarations/motoko_backend";
+import Login from './routes/Login';
 
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -15,6 +16,7 @@ const App = () => {
         <Navbar/>
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<Login/>}/>
         </Routes>
       </Router>
 
