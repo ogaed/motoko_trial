@@ -32,8 +32,9 @@ const Home = () => {
       national_id: nationalId
     })
       .then(() => {
-      alert('Welcome ${first_name}')
+      alert('Welcome ')
         console.log('User added successfully');
+        window.location.href = '/dashboard';
       })
       .catch((error) => {
         console.error('Error adding user:', error);
