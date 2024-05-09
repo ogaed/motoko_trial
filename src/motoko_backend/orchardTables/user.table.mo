@@ -1,6 +1,7 @@
+import Principal "mo:base/Principal";
 module {
     public type User = {
-        userId : Text;
+        userId : Principal;
         email : Text;
         first_name : Text;
         last_name : Text;

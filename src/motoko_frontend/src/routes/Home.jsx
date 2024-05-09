@@ -32,6 +32,7 @@ const Home = () => {
       national_id: nationalId
     })
       .then(() => {
+      alert('Welcome ${first_name}')
         console.log('User added successfully');
       })
       .catch((error) => {
