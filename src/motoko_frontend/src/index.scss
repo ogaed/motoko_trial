@@ -143,3 +143,13 @@ button[type="submit"]:active {
     display: block !important;
   }
 }
+@media screen and (max-width: 768px) {
+  #home .right-column {
+    display: none !important;
+  }
+  
+  #home .left-column {
+    width: 100% !important;
+    padding-right: 0 !important;
+  }
+}

@@ -10,7 +10,7 @@ const Home = () => {
     <div id='home' style={containerStyle}>
       <section style={sectionStyle}>
         <div style={gridContainerStyle}>
-          <div style={leftColumnStyle}>
+          <div style={leftColumnStyle} className="left-column">
             <div style={contentWrapperStyle}>
               <div style={textContentStyle}>
                 <h1 style={headingStyle}>Welcome to Orchard</h1>
@@ -34,7 +34,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div style={rightColumnStyle}>
+          <div style={rightColumnStyle} className="right-column">
             <div style={photoContainer}>
               <img src="photo1.jpg" alt="Background Photo" style={img1} />
               <img src="photo2.jpg" alt="Foreground Photo" style={img2} />
@@ -92,13 +92,10 @@ const containerStyle = {
   minHeight: '100vh',
   display: 'flex',
   flexDirection: 'column',
-  width: '100%',
-  position: 'relative',
-  overflowX: 'hidden'
+  position: 'relative'
 };
 
 const sectionStyle = {
-  width: '100%',
   padding: '20px',
   '@media (max-width: 768px)': {
     padding: '10px'
@@ -210,12 +207,11 @@ const rightColumnStyle = {
   flex: '1',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'flex-end',
   width: '50%',
   padding: '16px',
   '@media (max-width: 768px)': {
-    width: '100%',
-    padding: '0'
+    display: 'none'
   }
 };
 
@@ -274,8 +270,10 @@ const aboutSectionStyle = {
   maxWidth: '1200px',
   margin: '0 auto',
   background: 'rgba(255, 255, 255, 0.7)',
-  width: '100%',
-  textAlign: 'center'
+  textAlign: 'center',
+  '@media (max-width: 768px)': {
+    width: '100%',
+  }
 };
 
 const sectionTextStyle = {
@@ -292,7 +290,6 @@ const servicesGridStyle = {
   gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
   gap: '24px',
   marginTop: '40px',
-  width: '100%',
   padding: '0 16px',
   maxWidth: '1200px',
   margin: '0 auto'
@@ -301,7 +298,6 @@ const servicesGridStyle = {
 // Update the servicesSectionStyle object
 const servicesSectionStyle = {
   padding: '80px 16px',
-  width: '100%',
   backgroundColor: 'rgba(255, 255, 255, 0.1)',
   '@media (max-width: 768px)': {
     padding: '40px 16px'
@@ -353,8 +349,10 @@ const contactSectionStyle = {
   maxWidth: '1200px',
   margin: '0 auto',
   background: 'rgba(255, 255, 255, 0.7)',
-  width: '100%',
-  textAlign: 'center'
+  textAlign: 'center',
+  '@media (max-width: 768px)': {
+    width: '100%',
+  }
 };
 
 const contactContentStyle = {
