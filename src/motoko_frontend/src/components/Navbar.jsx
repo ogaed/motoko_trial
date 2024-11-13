@@ -33,14 +33,14 @@ const Navbar = () => {
         </Link>
 
         {/* Hamburger Menu Button */}
-        <div style={hamburgerStyle} onClick={() => setIsOpen(!isOpen)}>
+        <div className="hamburger" style={hamburgerStyle} onClick={() => setIsOpen(!isOpen)}>
           <span style={hamburgerLineStyle}></span>
           <span style={hamburgerLineStyle}></span>
           <span style={hamburgerLineStyle}></span>
         </div>
 
         {/* Navigation Links */}
-        <ul style={{
+        <ul className={`nav-links ${isOpen ? 'open' : ''}`} style={{
           ...navLinksStyle,
           ...(isOpen ? mobileNavLinksStyle : {})
         }}>
@@ -122,19 +122,18 @@ const hamburgerStyle = {
   cursor: 'pointer',
   padding: '0',
   zIndex: '10',
-  '@media (max-width: 768px)': {
-    display: 'flex',
-  }
+  gap: '6px'
 };
 
 const hamburgerLineStyle = {
-  width: '2rem',
-  height: '0.25rem',
+  width: '100%',
+  height: '3px',
   backgroundColor: '#ffffff',
   borderRadius: '10px',
   transition: 'all 0.3s linear',
   position: 'relative',
   transformOrigin: '1px',
+  display: 'block'
 };
 
 const navLinksStyle = {
@@ -187,14 +186,25 @@ const styles = `
   @media (max-width: 768px) {
     .hamburger {
       display: flex !important;
+      align-items: center;
+      justify-content: center;
     }
     
     .nav-links {
-      display: none;
+      display: none !important;
     }
     
     .nav-links.open {
-      display: flex;
+      display: flex !important;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: #528508;
+      width: 100%;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
   }
 `;

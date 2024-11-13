@@ -3,9 +3,46 @@ import Crops from './Crops';
 import Products from './Products';
 import Issues from './Issues';
 import Cart from './Cart';
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState('crops');
+  const { user } = useAuth();
+  console.log('Dashboard - User state:', user);
+
+  const getInitialTab = (role) => {
+    console.log('Setting initial tab for role:', role);
+    switch (role) {
+      case 'farmer': return 'crops';
+      case 'customer': return 'products';
+      case 'farm_specialist': return 'issues';
+      default: return 'products';
+    }
+  };
+
+  const [activeTab, setActiveTab] = useState(getInitialTab(user.role));
+
+  const getAvailableTabs = () => {
+    switch (user.role) {
+      case 'farmer':
+        return [
+          { id: 'crops', label: 'Crops' },
+          { id: 'products', label: 'Products' },
+          { id: 'issues', label: 'Issues' },
+          { id: 'cart', label: 'Cart' }
+        ];
+      case 'customer':
+        return [
+          { id: 'products', label: 'Products' },
+          { id: 'cart', label: 'Cart' }
+        ];
+      case 'farm_specialist':
+        return [
+          { id: 'issues', label: 'Issues' }
+        ];
+      default:
+        return [];
+    }
+  };
 
   const renderContent = () => {
     switch (activeTab) {
@@ -24,25 +61,10 @@ const Dashboard = () => {
 
   return (
     <div style={{ background: 'linear-gradient(to bottom, #e8f5e9, #c8e6c9)', minHeight: '100vh', padding: '2rem' }}>
-      <div style={{ 
-        backgroundColor: '#ffffff', 
-        padding: '20px', 
-        borderRadius: '10px', 
-        maxWidth: '1200px',
-        margin: '0 auto',
-        width: '90%',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-      }}>
-        <h2 style={{ textAlign: 'center', color: '#528508ff', marginBottom: '20px' }}>Dashboard</h2>
-        
-        {/* Tab List */}
+      <div style={containerStyle}>
+        <h2 style={headingStyle}>Dashboard</h2>
         <div style={tabListStyle}>
-          {[
-            { id: 'crops', label: 'Crops' },
-            { id: 'products', label: 'Products' },
-            { id: 'issues', label: 'Issues' },
-            { id: 'cart', label: 'Cart' }
-          ].map((tab) => (
+          {getAvailableTabs().map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
@@ -55,14 +77,28 @@ const Dashboard = () => {
             </button>
           ))}
         </div>
-
-        {/* Content Area */}
         <div style={{ marginTop: '2rem' }}>
           {renderContent()}
         </div>
       </div>
     </div>
   );
+};
+
+const containerStyle = {
+  backgroundColor: '#ffffff',
+  padding: '20px',
+  borderRadius: '10px',
+  maxWidth: '1200px',
+  margin: '0 auto',
+  width: '90%',
+  boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+};
+
+const headingStyle = {
+  textAlign: 'center',
+  color: '#528508ff',
+  marginBottom: '20px'
 };
 
 const tabListStyle = {

@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motoko_backend } from '../../../declarations/motoko_backend';
 import sharedStyles from '../styles/sharedStyles';
+import { useAuth } from '../context/AuthContext';
 
 const Crops = () => {
+  const { user } = useAuth();
+  
+  const canEdit = user.role === 'farmer';
+  const canAdd = user.role === 'farmer';
+  const canDelete = user.role === 'farmer';
+  const canView = user.role === 'farmer' || user.role === 'farm_specialist';
+
+  if (!canView) {
+    return <div>Access Denied</div>;
+  }
+
   const [crops, setCrops] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [newCropData, setNewCropData] = useState({
@@ -89,14 +101,16 @@ const handleInputChange = (event) => {
     }}>
       <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '10px', maxWidth: '800px', width: '100%' }}>
         <h2 style={{ textAlign: 'center', color: '#528508ff', marginBottom: '20px' }}>Crops List</h2>
-        <button onClick={() => setShowPopup(true)} style={buttonStyle}>Add Crop</button>
+        {canAdd && (
+          <button onClick={() => setShowPopup(true)} style={buttonStyle}>Add Crop</button>
+        )}
         <table style={tableStyle}>
           <thead>
             <tr>
               <th>Crop ID</th>
               <th>Crop Name</th>
               <th>Crop Age</th>
-              {/* Add other table headers as needed */}
+              {(canEdit || canDelete) && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -105,7 +119,20 @@ const handleInputChange = (event) => {
                 <td>{crop[0]}</td>
                 <td>{crop[1].crop_name}</td>
                 <td>{crop[1].acreage}</td>
-                {/* Add other table data as needed */}
+                {(canEdit || canDelete) && (
+                  <td>
+                    {canEdit && (
+                      <button onClick={() => handleEdit(crop[0])} style={{ ...buttonStyle, marginRight: '5px' }}>
+                        Edit
+                      </button>
+                    )}
+                    {canDelete && (
+                      <button onClick={() => handleDelete(crop[0])} style={{ ...buttonStyle, backgroundColor: 'red' }}>
+                        Delete
+                      </button>
+                    )}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

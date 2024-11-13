@@ -9,21 +9,31 @@ import Home from './routes/Home';
 import Register from './routes/Register';
 import Navbar from './components/Navbar';
 import Dashboard from './routes/Dashboard';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
   return (
-    <div>
-      <Router>
-        <Navbar/>
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/register' element={<Register/>}/>
-          <Route path='/dashboard' element={<Dashboard/>}/>
-        </Routes>
-      </Router>
-
-    </div>
+    <AuthProvider>
+      <div>
+        <Router>
+          <Navbar/>
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/register' element={<Register/>}/>
+            <Route 
+              path='/dashboard' 
+              element={
+                <ProtectedRoute>
+                  <Dashboard/>
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </Router>
+      </div>
+    </AuthProvider>
   )
 
 }

@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motoko_backend } from '../../../declarations/motoko_backend';
 import sharedStyles from '../styles/sharedStyles';
+import { useAuth } from '../context/AuthContext';
 
 const Products = () => {
+  const { user } = useAuth();
+  
+  const canEdit = user.role === 'farmer';
+  const canAdd = user.role === 'farmer';
+  const canDelete = user.role === 'farmer';
+  const canAddToCart = user.role === 'customer';
   const [products, setCrops] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [newCropData, setNewCropData] = useState({
@@ -62,15 +69,18 @@ const Products = () => {
   return (
     <div style={{ 
       background: '#ffffff', 
-      minHeight: '65vh',  // Reduced from 100vh
+      minHeight: '65vh',
       display: 'flex', 
       justifyContent: 'center', 
       alignItems: 'center', 
       borderRadius: '10px',
-      padding: '-5rem' // Added padding to maintain some spacing
-    }}> <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '10px', maxWidth: '800px', width: '100%' }}>
+      padding: '-5rem'
+    }}>
+      <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '10px', maxWidth: '800px', width: '100%' }}>
         <h2 style={{ textAlign: 'center', color: '#528508ff', marginBottom: '20px' }}>Products List</h2>
-        <button onClick={() => setShowPopup(true)} style={buttonStyle}>Add Product</button>
+        {canAdd && (
+          <button onClick={() => setShowPopup(true)} style={buttonStyle}>Add Product</button>
+        )}
         <table style={tableStyle}>
           <thead>
             <tr>
@@ -78,7 +88,7 @@ const Products = () => {
               <th>Product Name</th>
               <th>Product Price</th>
               <th>Product Quantity</th>
-              {/* Add other table headers as needed */}
+              {(canEdit || canDelete || canAddToCart) && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -88,7 +98,23 @@ const Products = () => {
                 <td>{product[1].pName}</td>
                 <td>{product[1].price}</td>
                 <td>{product[1].quantity}</td>
-                {/* Add other table data as needed */}
+                <td>
+                  {canEdit && (
+                    <button onClick={() => handleEdit(product[0])} style={{ ...buttonStyle, marginRight: '5px' }}>
+                      Edit
+                    </button>
+                  )}
+                  {canDelete && (
+                    <button onClick={() => handleDelete(product[0])} style={{ ...buttonStyle, backgroundColor: 'red' }}>
+                      Delete
+                    </button>
+                  )}
+                  {canAddToCart && (
+                    <button onClick={() => handleAddToCart(product[0])} style={{ ...buttonStyle, backgroundColor: '#4CAF50' }}>
+                      Add to Cart
+                    </button>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

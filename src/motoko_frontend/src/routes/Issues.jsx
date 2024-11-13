@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motoko_backend } from '../../../declarations/motoko_backend';
 import sharedStyles from '../styles/sharedStyles';
+import { useAuth } from '../context/AuthContext';
 
 const Issues = () => {
+  const { user } = useAuth();
+  
+  const canEdit = user.role === 'farmer' || user.role === 'farm_specialist';
+  const canAdd = user.role === 'farmer';
+  const canDelete = user.role === 'farmer';
+
   const [crops, setCrops] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [newCropData, setNewCropData] = useState({
@@ -68,7 +75,7 @@ const Issues = () => {
       padding: '-5rem' // Added padding to maintain some spacing
     }}>  <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '10px', maxWidth: '800px', width: '100%' }}>
         <h2 style={{ textAlign: 'center', color: '#528508ff', marginBottom: '20px' }}>Issue List</h2>
-        <button onClick={() => setShowPopup(true)} style={buttonStyle}>Add Issue</button>
+        {canAdd && <button onClick={() => setShowPopup(true)} style={buttonStyle}>Add Issue</button>}
         <table style={tableStyle}>
           <thead>
             <tr>
@@ -101,7 +108,7 @@ const Issues = () => {
               <input type="text" name="crop_id" value={newCropData.crop_id} onChange={handleInputChange} placeholder="Crop Id" style={inputStyle} />
               <input type="text" name="farm_specialist_id" value={newCropData.farm_specialist_id} onChange={handleInputChange} placeholder="Farm Specialist" style={inputStyle} />
              <input type="text" name="user_id" value={newCropData.user_id} onChange={handleInputChange} placeholder="User ID" style={inputStyle} />
-              <button onClick={addCrop} style={buttonStyle}>Add Issue</button>
+              {canAdd && <button onClick={addCrop} style={buttonStyle}>Add Issue</button>}
               <button onClick={() => setShowPopup(false)} style={{ ...buttonStyle, backgroundColor: 'red', marginTop: '10px' }}>Cancel</button>
             </div>
           </>
