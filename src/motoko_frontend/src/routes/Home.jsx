@@ -35,7 +35,10 @@ const Home = () => {
           </div>
 
           <div style={rightColumnStyle}>
-            {/* Image section can be added here */}
+            <div style={photoContainer}>
+              <img src="photo1.jpg" alt="Background Photo" style={img1} />
+              <img src="photo2.jpg" alt="Foreground Photo" style={img2} />
+            </div>
           </div>
         </div>
       </section>
@@ -111,13 +114,13 @@ const leftColumnStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '50%'
+  width: '50%',
+  paddingRight: '40px'
 };
 
 const contentWrapperStyle = {
   height: '100%',
   paddingTop: '96px',
-  paddingBottom: '56px'
 };
 
 const textContentStyle = {
@@ -222,9 +225,10 @@ const servicesSectionStyle = {
 
 const servicesGridStyle = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gridTemplateColumns: 'repeat(3, 1fr)',
   gap: '24px',
-  marginTop: '40px'
+  marginTop: '40px',
+  width: '100%'
 };
 
 const serviceCardStyle = {
@@ -270,5 +274,35 @@ const contactInfoStyle = {
   color: '#666',
   lineHeight: '1.8'
 };
+
+const photoContainer = {
+  position: "relative",
+  width: "500px",
+  height: "500px"
+};
+
+const img1 = {
+  position: "absolute",
+  width: "80%",
+  border: "5px solid white",
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+  borderRadius: "10px",
+  top: 0,
+  left: 0,
+  zIndex: 1,
+  transform: "rotate(-5deg)"
+};
+const img2 = {
+  position: "absolute",
+  width: "80%",
+  border: "5px solid white",
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+  borderRadius: "10px",
+  top: "20px",
+  left: "30px",
+  zIndex: 2,
+  transform: "rotate(5deg)"
+}
+
   
 export default Home;

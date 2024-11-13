@@ -1,12 +1,28 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isCurrentPage = (path) => {
     return location.pathname === path;
+  };
+
+  const handleNavigation = (path) => {
+    if (location.pathname === '/') {
+      // If we're already on home page, just scroll to the section
+      const element = document.getElementById(path.replace('/#', ''));
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If we're on another page, navigate to home and then scroll
+      navigate(path);
+      setTimeout(() => {
+        const element = document.getElementById(path.replace('/#', ''));
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
   };
 
   return (
@@ -29,23 +45,19 @@ const Navbar = () => {
           ...(isOpen ? mobileNavLinksStyle : {})
         }}>
           {[
-            { name: 'Home', path: '/#home' },
+            { name: 'Home', path: '/' },
             { name: 'About', path: '/#about' },
             { name: 'Services', path: '/#services' },
             { name: 'Contact', path: '/#contact' }
           ].map((item) => (
             <li key={item.name}>
-              <Link
-                to={item.path}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const element = document.getElementById(item.path.substring(2));
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
+              <div
+                onClick={() => handleNavigation(item.path)}
                 style={{
                   ...linkStyle,
                   ...(isCurrentPage(item.path) ? activeLinkStyle : {}),
-                  ...(item.name === 'Contact' ? contactButtonStyle : {})
+                  ...(item.name === 'Contact' ? contactButtonStyle : {}),
+                  cursor: 'pointer'
                 }}
                 onMouseEnter={(e) => {
                   e.target.style.backgroundColor = item.name === 'Contact' 
@@ -63,7 +75,7 @@ const Navbar = () => {
                 }}
               >
                 {item.name}
-              </Link>
+              </div>
             </li>
           ))}
         </ul>
@@ -160,7 +172,6 @@ const activeLinkStyle = {
   fontWeight: 'bold',
 };
 
-// Add these new styles after your existing styles
 const contactButtonStyle = {
   backgroundColor: '#ffffff',
   color: '#528508',
@@ -172,7 +183,6 @@ const contactButtonStyle = {
   fontSize: '0.95rem'
 };
 
-// Add this to your index.scss or create a new CSS file
 const styles = `
   @media (max-width: 768px) {
     .hamburger {
@@ -189,7 +199,6 @@ const styles = `
   }
 `;
 
-// Create and append style element
 const styleSheet = document.createElement('style');
 styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
