@@ -24,7 +24,15 @@ const Dashboard = () => {
 
   return (
     <div style={{ background: 'linear-gradient(to bottom, #e8f5e9, #c8e6c9)', minHeight: '100vh', padding: '2rem' }}>
-      <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '10px', maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ 
+        backgroundColor: '#ffffff', 
+        padding: '20px', 
+        borderRadius: '10px', 
+        maxWidth: '1200px',
+        margin: '0 auto',
+        width: '90%',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+      }}>
         <h2 style={{ textAlign: 'center', color: '#528508ff', marginBottom: '20px' }}>Dashboard</h2>
         
         {/* Tab List */}
@@ -61,7 +69,12 @@ const tabListStyle = {
   display: 'flex',
   gap: '1rem',
   borderBottom: '2px solid #e0e0e0',
-  paddingBottom: '0.5rem'
+  paddingBottom: '0.5rem',
+  '@media (max-width: 768px)': {
+    flexDirection: 'column',
+    gap: '0.5rem',
+    width: '100%'
+  }
 };
 
 const tabButtonStyle = {
@@ -73,7 +86,13 @@ const tabButtonStyle = {
   cursor: 'pointer',
   fontSize: '1rem',
   fontWeight: '500',
-  transition: 'all 0.2s ease'
+  transition: 'all 0.2s ease',
+  width: '100%',
+  textAlign: 'left',
+  '@media (max-width: 768px)': {
+    padding: '1rem',
+    borderRadius: '4px'
+  }
 };
 
 const activeTabStyle = {
