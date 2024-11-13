@@ -29,14 +29,19 @@ const Navbar = () => {
           ...(isOpen ? mobileNavLinksStyle : {})
         }}>
           {[
-            { name: 'Home', path: '/Dashboard' },
-            { name: 'About', path: '/about' },
-            { name: 'Services', path: '/services' },
-            { name: 'Contact', path: '/contact' }
+            { name: 'Home', path: '/#home' },
+            { name: 'About', path: '/#about' },
+            { name: 'Services', path: '/#services' },
+            { name: 'Contact', path: '/#contact' }
           ].map((item) => (
             <li key={item.name}>
               <Link
                 to={item.path}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById(item.path.substring(2));
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 style={{
                   ...linkStyle,
                   ...(isCurrentPage(item.path) ? activeLinkStyle : {}),

@@ -7,7 +7,7 @@ const Home = () => {
   };
 
   return (
-    <div style={containerStyle}>
+    <div id='home' style={containerStyle}>
       <section style={sectionStyle}>
         <div style={gridContainerStyle}>
           <div style={leftColumnStyle}>
@@ -39,6 +39,47 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <section style={aboutSectionStyle} id="about">
+        <h2 style={sectionHeadingStyle}>About Us</h2>
+        <p style={sectionTextStyle}>
+          Orchard was founded with a vision to revolutionize the way local communities access fresh, sustainable produce. 
+          Our platform serves as a bridge between passionate farmers and conscious consumers, fostering a sustainable and 
+          transparent food ecosystem.
+        </p>
+      </section>
+
+      <section style={servicesSectionStyle} id="services">
+        <h2 style={sectionHeadingStyle}>Our Services</h2>
+        <div style={servicesGridStyle}>
+          <div style={serviceCardStyle}>
+            <h3 style={serviceCardHeadingStyle}>Marketplace</h3>
+            <p style={serviceCardTextStyle}>Browse and purchase fresh, local produce directly from farmers</p>
+          </div>
+          <div style={serviceCardStyle}>
+            <h3 style={serviceCardHeadingStyle}>Farmer Connect</h3>
+            <p style={serviceCardTextStyle}>Connect and build relationships with local farmers</p>
+          </div>
+          <div style={serviceCardStyle}>
+            <h3 style={serviceCardHeadingStyle}>Education</h3>
+            <p style={serviceCardTextStyle}>Learn about sustainable farming practices and seasonal produce</p>
+          </div>
+        </div>
+      </section>
+
+      <section style={contactSectionStyle} id="contact">
+        <h2 style={sectionHeadingStyle}>Contact Us</h2>
+        <div style={contactContentStyle}>
+          <p style={contactTextStyle}>
+            Have questions or feedback? We'd love to hear from you!
+          </p>
+          <div style={contactInfoStyle}>
+            <p>Email: contact@orchard.com</p>
+            <p>Phone: (555) 123-4567</p>
+            <p>Address: 123 Farm Street, Agricultural District</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
@@ -47,6 +88,7 @@ const containerStyle = {
   background: 'linear-gradient(to bottom, #e8f5e9, #c8e6c9)',
   minHeight: '100vh',
   display: 'flex',
+  flexDirection: 'column',
   width: '100%',
   position: 'relative'
 };
@@ -146,6 +188,87 @@ const rightColumnStyle = {
   justifyContent: 'center',
   width: '50%',
   padding: '16px'
+};
+
+const sectionHeadingStyle = {
+  fontSize: '36px',
+  fontWeight: 'bold',
+  color: '#528508ff',
+  marginBottom: '24px',
+  textAlign: 'center'
+};
+
+const aboutSectionStyle = {
+  padding: '80px 24px',
+  maxWidth: '1200px',
+  margin: '0 auto',
+  textAlign: 'center'
+};
+
+const sectionTextStyle = {
+  fontSize: '18px',
+  color: '#444',
+  lineHeight: '1.6',
+  maxWidth: '800px',
+  margin: '0 auto'
+};
+
+const servicesSectionStyle = {
+  padding: '80px 24px',
+  background: 'rgba(255, 255, 255, 0.7)',
+  maxWidth: '1200px',
+  margin: '0 auto'
+};
+
+const servicesGridStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gap: '24px',
+  marginTop: '40px'
+};
+
+const serviceCardStyle = {
+  padding: '24px',
+  background: 'white',
+  borderRadius: '8px',
+  boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  textAlign: 'center'
+};
+
+const serviceCardHeadingStyle = {
+  fontSize: '24px',
+  color: '#528508ff',
+  marginBottom: '16px'
+};
+
+const serviceCardTextStyle = {
+  fontSize: '16px',
+  color: '#666',
+  lineHeight: '1.5'
+};
+
+const contactSectionStyle = {
+  padding: '80px 24px',
+  maxWidth: '1200px',
+  margin: '0 auto',
+  textAlign: 'center'
+};
+
+const contactContentStyle = {
+  maxWidth: '600px',
+  margin: '0 auto'
+};
+
+const contactTextStyle = {
+  fontSize: '20px',
+  color: '#444',
+  marginBottom: '32px'
+};
+
+const contactInfoStyle = {
+  fontSize: '18px',
+  color: '#666',
+  lineHeight: '1.8'
 };
   
 export default Home;

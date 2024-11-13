@@ -42,7 +42,7 @@ const Register = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#528508ff', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ background: 'linear-gradient(to top, #e8f5e9, #c8e6c9)', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '10px', maxWidth: '400px', width: '100%' }}>
         <h2 style={{ textAlign: 'center', color: '#528508ff', marginBottom: '20px' }}>Add User</h2>
         <input type="text" name="email" value={userData.email} onChange={handleInputChange} placeholder="Email" style={inputStyle} />
