@@ -82,7 +82,7 @@ const Issues = () => {
               <th>Issue ID </th>
               <th>Description</th>
               <th>Issue type</th>
-
+              <th>Issue ID </th>
               {/* Add other table headers as needed */}
             </tr>
           </thead>

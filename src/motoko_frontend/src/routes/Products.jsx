@@ -19,6 +19,8 @@ const Products = () => {
     quantity: '',
     user_id: ''
   });
+  const [editMode, setEditMode] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
 
   useEffect(() => {
     fetchCrops();
@@ -61,6 +63,35 @@ const Products = () => {
       console.log('Crop added successfully');
     } catch (error) {
       console.error('Error adding crop:', error);
+    }
+  };
+
+  const handleEdit = (productId) => {
+    const product = products.find(p => p[0] === productId);
+    if (product) {
+      setEditingProduct({
+        cropId: product[1].cropId,
+        pName: product[1].pName,
+        price: product[1].price,
+        quantity: product[1].quantity,
+        user_id: product[1].user_id
+      });
+      setEditMode(true);
+    }
+  };
+
+  const updateProduct = async () => {
+    try {
+      await motoko_backend.updateProduct({
+        productId: editingProduct.productId,
+        ...editingProduct
+      });
+      setEditMode(false);
+      setEditingProduct(null);
+      fetchCrops();
+      alert('Product updated successfully');
+    } catch (error) {
+      console.error('Error updating product:', error);
     }
   };
 
@@ -131,6 +162,64 @@ const Products = () => {
                <input type="text" name="user_id" value={newCropData.user_id} onChange={handleInputChange} placeholder="User ID" style={inputStyle} />
               <button onClick={addCrop} style={buttonStyle}>Add Product</button>
               <button onClick={() => setShowPopup(false)} style={{ ...buttonStyle, backgroundColor: 'red', marginTop: '10px' }}>Cancel</button>
+            </div>
+          </>
+        )}
+        {editMode && editingProduct && (
+          <>
+            <div style={overlayStyle} onClick={() => setEditMode(false)} />
+            <div style={popupStyle}>
+              <h2 style={{ textAlign: 'center', color: '#528508ff', marginBottom: '20px' }}>Edit Product</h2>
+              <input 
+                type="text" 
+                name="cropId" 
+                value={editingProduct.cropId} 
+                onChange={(e) => setEditingProduct({...editingProduct, cropId: e.target.value})} 
+                placeholder="Crop Id" 
+                style={inputStyle} 
+              />
+              <input 
+                type="text" 
+                name="pName" 
+                value={editingProduct.pName} 
+                onChange={(e) => setEditingProduct({...editingProduct, pName: e.target.value})} 
+                placeholder="Product Name" 
+                style={inputStyle} 
+              />
+              <input 
+                type="text" 
+                name="price" 
+                value={editingProduct.price} 
+                onChange={(e) => setEditingProduct({...editingProduct, price: e.target.value})} 
+                placeholder="Price" 
+                style={inputStyle} 
+              />
+              <input 
+                type="text" 
+                name="quantity" 
+                value={editingProduct.quantity} 
+                onChange={(e) => setEditingProduct({...editingProduct, quantity: e.target.value})} 
+                placeholder="Quantity" 
+                style={inputStyle} 
+              />
+              <input 
+                type="text" 
+                name="user_id" 
+                value={editingProduct.user_id} 
+                onChange={(e) => setEditingProduct({...editingProduct, user_id: e.target.value})} 
+                placeholder="User ID" 
+                style={inputStyle} 
+              />
+              <button onClick={updateProduct} style={buttonStyle}>Update Product</button>
+              <button 
+                onClick={() => {
+                  setEditMode(false);
+                  setEditingProduct(null);
+                }} 
+                style={{ ...buttonStyle, backgroundColor: 'red', marginTop: '10px' }}
+              >
+                Cancel
+              </button>
             </div>
           </>
         )}
