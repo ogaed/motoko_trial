@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motoko_backend } from '../../../declarations/motoko_backend';
+import sharedStyles from '../styles/sharedStyles';
 
 const Products = () => {
   const [products, setCrops] = useState([]);
@@ -56,12 +57,21 @@ const Products = () => {
     }
   };
 
+  const { inputStyle, buttonStyle, popupStyle, overlayStyle, tableStyle } = sharedStyles;
+
   return (
-    <div style={{ backgroundColor: '#528508ff', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '10px', maxWidth: '800px', width: '100%' }}>
+    <div style={{ 
+      background: '#ffffff', 
+      minHeight: '65vh',  // Reduced from 100vh
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      borderRadius: '10px',
+      padding: '-5rem' // Added padding to maintain some spacing
+    }}> <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '10px', maxWidth: '800px', width: '100%' }}>
         <h2 style={{ textAlign: 'center', color: '#528508ff', marginBottom: '20px' }}>Products List</h2>
         <button onClick={() => setShowPopup(true)} style={buttonStyle}>Add Product</button>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
+        <table style={tableStyle}>
           <thead>
             <tr>
               <th>Product ID</th>
@@ -84,52 +94,23 @@ const Products = () => {
           </tbody>
         </table>
         {showPopup && (
-          <div style={popupStyle}>
-            <h2 style={{ textAlign: 'center', color: '#528508ff', marginBottom: '20px' }}>Add Product</h2>
-            <input type="text" name="cropId" value={newCropData.cropId} onChange={handleInputChange} placeholder="Crop Id" style={inputStyle} />
-            <input type="text" name="pName" value={newCropData.pName} onChange={handleInputChange} placeholder="Product Name" style={inputStyle} />
-            <input type="text" name="price" value={newCropData.price} onChange={handleInputChange} placeholder="Price" style={inputStyle} />
-            <input type="text" name="quantity" value={newCropData.quantity} onChange={handleInputChange} placeholder="Quantity" style={inputStyle} />
-             <input type="text" name="user_id" value={newCropData.user_id} onChange={handleInputChange} placeholder="User ID" style={inputStyle} />
-            <button onClick={addCrop} style={buttonStyle}>Add Product</button>
-            <button onClick={() => setShowPopup(false)} style={{ ...buttonStyle, backgroundColor: 'red', marginTop: '10px' }}>Cancel</button>
-          </div>
+          <>
+            <div style={overlayStyle} onClick={() => setShowPopup(false)} />
+            <div style={popupStyle}>
+              <h2 style={{ textAlign: 'center', color: '#528508ff', marginBottom: '20px' }}>Add Product</h2>
+              <input type="text" name="cropId" value={newCropData.cropId} onChange={handleInputChange} placeholder="Crop Id" style={inputStyle} />
+              <input type="text" name="pName" value={newCropData.pName} onChange={handleInputChange} placeholder="Product Name" style={inputStyle} />
+              <input type="text" name="price" value={newCropData.price} onChange={handleInputChange} placeholder="Price" style={inputStyle} />
+              <input type="text" name="quantity" value={newCropData.quantity} onChange={handleInputChange} placeholder="Quantity" style={inputStyle} />
+               <input type="text" name="user_id" value={newCropData.user_id} onChange={handleInputChange} placeholder="User ID" style={inputStyle} />
+              <button onClick={addCrop} style={buttonStyle}>Add Product</button>
+              <button onClick={() => setShowPopup(false)} style={{ ...buttonStyle, backgroundColor: 'red', marginTop: '10px' }}>Cancel</button>
+            </div>
+          </>
         )}
       </div>
     </div>
   );
-};
-
-const inputStyle = {
-  marginBottom: '10px',
-  width: '100%',
-  padding: '10px',
-  boxSizing: 'border-box',
-  borderRadius: '5px',
-  border: '1px solid #528508ff'
-};
-
-const buttonStyle = {
-  backgroundColor: '#528508ff',
-  color: '#ffffff',
-  padding: '10px',
-  width: '100%',
-  borderRadius: '5px',
-  border: 'none',
-  cursor: 'pointer'
-};
-
-const popupStyle = {
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  backgroundColor: '#ffffff',
-  padding: '20px',
-  borderRadius: '10px',
-  maxWidth: '600px',
-  width: '100%',
-  zIndex: '9999'
 };
 
 export default Products;
