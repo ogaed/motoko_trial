@@ -93,12 +93,16 @@ const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  position: 'relative'
+  position: 'relative',
+  overflowX: 'hidden'
 };
 
 const sectionStyle = {
-  overflow: 'hidden',
-  width: '100%'
+  width: '100%',
+  padding: '20px',
+  '@media (max-width: 768px)': {
+    padding: '10px'
+  }
 };
 
 const gridContainerStyle = {
@@ -106,7 +110,11 @@ const gridContainerStyle = {
   flexDirection: 'row',
   padding: '0 24px',
   maxWidth: '1200px',
-  margin: '0 auto'
+  margin: '0 auto',
+  '@media (max-width: 768px)': {
+    flexDirection: 'column',
+    padding: '0 16px'
+  }
 };
 
 const leftColumnStyle = {
@@ -115,12 +123,20 @@ const leftColumnStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   width: '50%',
-  paddingRight: '40px'
+  paddingRight: '40px',
+  '@media (max-width: 768px)': {
+    width: '100%',
+    paddingRight: '0',
+    marginBottom: '40px'
+  }
 };
 
 const contentWrapperStyle = {
   height: '100%',
   paddingTop: '96px',
+  '@media (max-width: 768px)': {
+    paddingTop: '40px'
+  }
 };
 
 const textContentStyle = {
@@ -131,14 +147,20 @@ const headingStyle = {
   fontSize: '48px',
   fontWeight: 'bold',
   color: '#528508ff',
-  marginBottom: '24px'
+  marginBottom: '24px',
+  '@media (max-width: 768px)': {
+    fontSize: '32px'
+  }
 };
 
 const mainParaStyle = {
   fontSize: '20px',
   color: '#333',
   marginBottom: '16px',
-  lineHeight: '1.5'
+  lineHeight: '1.5',
+  '@media (max-width: 768px)': {
+    fontSize: '18px'
+  }
 };
 
 const subParaStyle = {
@@ -190,7 +212,53 @@ const rightColumnStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   width: '50%',
-  padding: '16px'
+  padding: '16px',
+  '@media (max-width: 768px)': {
+    width: '100%',
+    padding: '0'
+  }
+};
+
+const photoContainer = {
+  position: "relative",
+  width: "500px",
+  height: "500px",
+  '@media (max-width: 768px)': {
+    width: '100%',
+    height: '300px'
+  }
+};
+
+const img1 = {
+  position: "absolute",
+  width: "80%",
+  border: "5px solid white",
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+  borderRadius: "10px",
+  top: 0,
+  left: 0,
+  zIndex: 1,
+  transform: "rotate(-5deg)",
+  '@media (max-width: 768px)': {
+    width: '90%'
+  }
+};
+
+const img2 = {
+  position: "absolute",
+  width: "80%",
+  border: "5px solid white",
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+  borderRadius: "10px",
+  top: "20px",
+  left: "30px",
+  zIndex: 2,
+  transform: "rotate(5deg)",
+  '@media (max-width: 768px)': {
+    width: '90%',
+    top: '10px',
+    left: '20px'
+  }
 };
 
 const sectionHeadingStyle = {
@@ -205,6 +273,8 @@ const aboutSectionStyle = {
   padding: '80px 24px',
   maxWidth: '1200px',
   margin: '0 auto',
+  background: 'rgba(255, 255, 255, 0.7)',
+  width: '100%',
   textAlign: 'center'
 };
 
@@ -216,45 +286,74 @@ const sectionTextStyle = {
   margin: '0 auto'
 };
 
-const servicesSectionStyle = {
-  padding: '80px 24px',
-  background: 'rgba(255, 255, 255, 0.7)',
+// Update the servicesGridStyle object
+const servicesGridStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+  gap: '24px',
+  marginTop: '40px',
+  width: '100%',
+  padding: '0 16px',
   maxWidth: '1200px',
   margin: '0 auto'
 };
 
-const servicesGridStyle = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  gap: '24px',
-  marginTop: '40px',
-  width: '100%'
+// Update the servicesSectionStyle object
+const servicesSectionStyle = {
+  padding: '80px 16px',
+  width: '100%',
+  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  '@media (max-width: 768px)': {
+    padding: '40px 16px'
+  }
 };
 
+// Update the serviceCardStyle object
 const serviceCardStyle = {
   padding: '24px',
   background: 'white',
   borderRadius: '8px',
   boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-  textAlign: 'center'
+  textAlign: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+  ':hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
+  },
+  '@media (max-width: 768px)': {
+    padding: '20px'
+  }
 };
 
+// Update the serviceCardHeadingStyle object
 const serviceCardHeadingStyle = {
   fontSize: '24px',
   color: '#528508ff',
-  marginBottom: '16px'
+  marginBottom: '16px',
+  '@media (max-width: 768px)': {
+    fontSize: '20px'
+  }
 };
 
+// Update the serviceCardTextStyle object
 const serviceCardTextStyle = {
   fontSize: '16px',
   color: '#666',
-  lineHeight: '1.5'
+  lineHeight: '1.5',
+  '@media (max-width: 768px)': {
+    fontSize: '14px'
+  }
 };
 
 const contactSectionStyle = {
   padding: '80px 24px',
   maxWidth: '1200px',
   margin: '0 auto',
+  background: 'rgba(255, 255, 255, 0.7)',
+  width: '100%',
   textAlign: 'center'
 };
 
@@ -275,34 +374,6 @@ const contactInfoStyle = {
   lineHeight: '1.8'
 };
 
-const photoContainer = {
-  position: "relative",
-  width: "500px",
-  height: "500px"
-};
-
-const img1 = {
-  position: "absolute",
-  width: "80%",
-  border: "5px solid white",
-  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-  borderRadius: "10px",
-  top: 0,
-  left: 0,
-  zIndex: 1,
-  transform: "rotate(-5deg)"
-};
-const img2 = {
-  position: "absolute",
-  width: "80%",
-  border: "5px solid white",
-  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-  borderRadius: "10px",
-  top: "20px",
-  left: "30px",
-  zIndex: 2,
-  transform: "rotate(5deg)"
-}
 
   
 export default Home;
